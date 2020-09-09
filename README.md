@@ -25,26 +25,27 @@ Build and Deploy this function:
 ./mvnw package
 
 gcloud functions deploy occurrences-consumer \                                                             ↵ INT
---entry-point org.springframework.cloud.function.adapter.gcp.GcfJarLauncher \
---runtime java11 \
---trigger-topic container-analysis-occurrences-v1 \
---source target/deploy \
---memory 512MB
+  --entry-point org.springframework.cloud.function.adapter.gcp.GcfJarLauncher \
+  --runtime java11 \
+  --trigger-topic container-analysis-occurrences-v1 \
+  --source target/deploy \
+  --memory 512MB
 ```
 
 Deploy the Log-based Metrics configuration:
 ```
-gcloud beta logging metrics create container-vulnerability --config-from-file=cloudops/container-analysis-metrics.yaml
+gcloud beta logging metrics create container-vulnerability \
+  --config-from-file=cloudops/container-analysis-metrics.yaml
 ```
 
 Deploy the Alert Policy configuration:
 ```
-gcloud alpha monitoring policies create --policy-from-file=cloudops/vulnerability-policy.yaml
+gcloud alpha monitoring policies create \
+  --policy-from-file=cloudops/vulnerability-policy.yaml
 ```
 
 This configuration doesn't configure any notification channels. To get notified via e-mail, or Slack
 see [Manging notification channels documentation](https://cloud.google.com/monitoring/support/notification-options).
-
 
 ## Development
 Run Locally:
