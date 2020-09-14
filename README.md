@@ -24,7 +24,7 @@ Build and Deploy this function:
 ```
 ./mvnw package
 
-gcloud functions deploy occurrences-consumer \                                                             ↵ INT
+gcloud functions deploy occurrences-consumer \
   --entry-point org.springframework.cloud.function.adapter.gcp.GcfJarLauncher \
   --runtime java11 \
   --trigger-topic container-analysis-occurrences-v1 \
